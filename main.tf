@@ -16,8 +16,8 @@ data "aws_iam_policy_document" "aws_thanos" {
     ]
 
     resources = [
-      "arn:aws:s3:::${var.customer_name}-eks-thanos",
-      "arn:aws:s3:::${var.customer_name}-eks-thanos/*"
+      "arn:aws:s3:::${var.customer_name}-${var.cluster_name}-thanos",
+      "arn:aws:s3:::${var.customer_name}-${var.cluster_name}-thanos/*"
     ]
   }
 }
@@ -37,7 +37,7 @@ module "irsa_aws_thanos" {
   role_name                     = local.name_prefix
   provider_url                  = var.cluster_oidc_issuer_url
   role_policy_arns              = [aws_iam_policy.aws_thanos.arn]
-  oidc_fully_qualified_subjects = ["system:serviceaccount:${var.service_account_namespace}:${var.service_account_name}"]
+  oidc_fully_qualified_subjects = ["system:serviceaccount:${var.service_account_namespace}:*"]
 }
 
 resource "aws_s3_bucket" "aws_thanos" {
