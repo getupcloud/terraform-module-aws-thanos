@@ -41,8 +41,9 @@ module "irsa_aws_thanos" {
 }
 
 resource "aws_s3_bucket" "aws_thanos" {
-  bucket = "${var.customer_name}-{var.cluster_name}-thanos"
+  bucket = "${var.customer_name}-${var.cluster_name}-thanos"
   acl    = "private"
+  force_destroy = true
 
   tags = merge({
     Name = "${var.cluster_name}"
