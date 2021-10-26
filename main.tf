@@ -37,7 +37,7 @@ module "irsa_aws_thanos" {
   role_name                     = local.name_prefix
   provider_url                  = var.cluster_oidc_issuer_url
   role_policy_arns              = [aws_iam_policy.aws_thanos.arn]
-  oidc_fully_qualified_subjects = ["system:serviceaccount:${var.service_account_namespace}:*"]
+  oidc_subjects_with_wildcards = ["system:serviceaccount:${var.service_account_namespace}:*"]
 }
 
 resource "aws_s3_bucket" "aws_thanos" {
