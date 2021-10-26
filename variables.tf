@@ -19,7 +19,7 @@ variable "service_account_namespace" {
 
 variable "service_account_name" {
   description = "ServiceAccount name for thanos"
-  default     = "eks-infra-thanos"
+  default     = "thanos"
 }
 variable "tags" {
   description = "AWS tags to apply to resources"
